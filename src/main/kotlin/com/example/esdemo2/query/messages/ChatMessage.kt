@@ -1,0 +1,27 @@
+package com.example.esdemo2.query.messages
+
+import org.springframework.data.annotation.Id
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+
+
+@Entity
+class ChatMessage {
+    @Id
+    @GeneratedValue
+    var id: Long? = null
+
+    var timestamp: Long = 0
+    var roomId: String? = null
+    var message: String? = null
+    var participant: String? = null
+
+    constructor()
+
+    constructor(roomId: String?, participant: String?, message: String?, timestamp: Long) {
+        this.participant = participant
+        this.roomId = roomId
+        this.message = message
+        this.timestamp = timestamp
+    }
+}
