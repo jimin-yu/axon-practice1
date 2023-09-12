@@ -1,0 +1,7 @@
+### 결제 생성
+POST {{host}}/v1/rooms
+Content-Type: application/json
+
+{
+  "name": "채팅방111"
+}

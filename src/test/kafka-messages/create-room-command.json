@@ -1,0 +1,6 @@
+{
+  "commandName": "CreateRoomCommand",
+  "body": {
+    "name": "room1"
+  }
+}
