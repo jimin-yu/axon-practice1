@@ -1,14 +1,15 @@
 package com.example.esdemo2.query.messages
 
-import org.springframework.data.annotation.Id
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
 
 
 @Entity
 class ChatMessage {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
 
     var timestamp: Long = 0

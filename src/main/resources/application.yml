@@ -1,0 +1,22 @@
+#spring:
+#  main:
+#    allow-bean-definition-overriding: true
+#  datasource:
+#    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/axonmongo?characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+#    username: root
+#    password: 1111
+#  jpa:
+#    show-sql: true
+#    open-in-view: false
+#    hibernate:
+#      ddl-auto: create-drop
+#    properties:
+#      hibernate:
+#        new_generator_mapping: true
+#        discriminator:
+#          ignore_explicit_for_joined: true
+#axon:
+#  serializer:
+#    general: jackson
+#    messages: jackson
+#    events: jackson

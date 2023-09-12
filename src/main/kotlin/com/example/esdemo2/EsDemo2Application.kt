@@ -7,5 +7,6 @@ import org.springframework.boot.runApplication
 class EsDemo2Application
 
 fun main(args: Array<String>) {
+//	SpringApplication.run(EsDemo2Application::class.java, *args)
 	runApplication<EsDemo2Application>(*args)
 }
