@@ -1,12 +1,14 @@
 package com.example.esdemo2.coreapi
 
 import org.axonframework.modelling.command.TargetAggregateIdentifier
+import java.util.*
 import kotlin.reflect.KMutableProperty
 import kotlin.reflect.full.memberProperties
 
 abstract class Command{
-    constructor()
-    constructor(attributes: Map<String, Any>){
+//    constructor()
+
+    fun setProperties(attributes: Map<String, Any>){
         attributes.forEach {(key, value) ->
             val property = this::class.memberProperties.find { it.name == key }
             if (property is KMutableProperty<*>) {
@@ -20,8 +22,11 @@ class CreateRoomCommand : Command{
     var roomId: String = ""
     var name: String = ""
 
-    constructor(attributes: Map<String, Any>) : super(attributes)
-    constructor(roomId: String, name: String) : super(){
+    constructor(attributes: Map<String, Any>) {
+        this.roomId = UUID.randomUUID().toString()
+        setProperties(attributes)
+    }
+    constructor(roomId: String, name: String) {
         this.roomId = roomId
         this.name = name
     }

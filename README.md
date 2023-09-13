@@ -29,9 +29,21 @@ mysql.server start
 
 kafka 메세지 publish
 ```shell
-kcat -P -b localhost:9092 -t event-sourcing  src/test/kafka-messages/hello.json
+kcat -P -b localhost:9092 -t event-sourcing  src/test/kafka-messages/create-room-command.json
 ```
 
+mysql, mongodb에 쌓인 데이터 확인
+
+(참고용) mongodb 주요 command
+```
+show dbs
+db                    // 현재 db 확인
+use axonframework
+
+show collections
+db.domainevents.find()
+db.domainevents.drop()
+```
 
 
 

@@ -3,18 +3,17 @@ package com.example.esdemo2.consumer
 import com.example.esdemo2.consumer.dto.CommandMessage
 import com.fasterxml.jackson.databind.ObjectMapper
 import lombok.RequiredArgsConstructor
+import org.axonframework.commandhandling.gateway.CommandGateway
 import org.reflections.Reflections
 import org.reflections.scanners.SubTypesScanner
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Component
 
-
-
-
-
 @Component
 @RequiredArgsConstructor
-class KafkaConsumer(private val objectMapper: ObjectMapper) {
+class KafkaConsumer(
+    private val objectMapper: ObjectMapper,
+    private val commandGateway: CommandGateway) {
     class InvalidCommandNameException(message: String) : Exception(message)
 
     companion object {
@@ -28,7 +27,7 @@ class KafkaConsumer(private val objectMapper: ObjectMapper) {
         // Kafka 메시지를 처리하는 로직을 작성
         println("Received Kafka message: ${kafkaMessage}")
         val command = createCommand(kafkaMessage.commandName, kafkaMessage.body)
-        println("command!!!!!!!!!!!!!!! ${command}")
+        commandGateway.sendAndWait<Any>(command)
     }
 
     private fun createCommand(commandName: String, body: Map<String, Any>) : Any {
