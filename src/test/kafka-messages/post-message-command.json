@@ -1,0 +1,8 @@
+{
+  "commandName": "PostMessageCommand",
+  "body": {
+    "roomId": "9fe8aaa4-a901-4e02-85f8-aeb060da368f",
+    "participant": "Danny Koo",
+    "message": "안녕하세요~"
+  }
+}

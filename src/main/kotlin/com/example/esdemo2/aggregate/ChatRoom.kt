@@ -1,7 +1,13 @@
 package com.example.esdemo2.aggregate
 
-import com.example.esdemo2.coreapi.CreateRoomCommand
+import com.example.esdemo2.coreapi.MessagePostedEvent
+import com.example.esdemo2.coreapi.ParticipantJoinedRoomEvent
+import com.example.esdemo2.coreapi.ParticipantLeftRoomEvent
 import com.example.esdemo2.coreapi.RoomCreatedEvent
+import com.example.esdemo2.coreapi.commands.CreateRoomCommand
+import com.example.esdemo2.coreapi.commands.JoinRoomCommand
+import com.example.esdemo2.coreapi.commands.LeaveRoomCommand
+import com.example.esdemo2.coreapi.commands.PostMessageCommand
 import mu.KotlinLogging
 import org.axonframework.commandhandling.CommandHandler
 import org.axonframework.eventsourcing.EventSourcingHandler
@@ -20,7 +26,7 @@ class ChatRoom {
 
 
     @CommandHandler
-    constructor(cmd: CreateRoomCommand) {
+    fun handle(cmd: CreateRoomCommand) {
         logger.info { "handle command"}
         // business logic & validation
         AggregateLifecycle.apply(RoomCreatedEvent(cmd.roomId, cmd.name))
@@ -28,39 +34,44 @@ class ChatRoom {
 
     @EventSourcingHandler
     fun on(evt: RoomCreatedEvent) {
+        System.out.println("room created event!!!!!!!!!!!!!!!!")
         logger.info { "event sourcing handler"}
         roomId = evt.roomId
         name = evt.name
     }
 
-//    @CommandHandler
-//    fun handle(cmd: JoinRoomCommand) {
-//        if (!participants.contains(cmd.participant)) {
-//            AggregateLifecycle.apply(ParticipantJoinedRoomEvent(cmd.roomId, cmd.participant))
-//        }
-//    }
-//
-//    @EventSourcingHandler
-//    fun on(evt: ParticipantJoinedRoomEvent) {
-//        participants.add(evt.participant)
-//    }
-//
-//    @CommandHandler
-//    fun handle(cmd: LeaveRoomCommand) {
-//        if (participants.contains(cmd.participant)) {
-//            AggregateLifecycle.apply(ParticipantLeftRoomEvent(cmd.roomId, cmd.participant))
-//        }
-//    }
-//
-//    @EventSourcingHandler
-//    fun on(evt: ParticipantLeftRoomEvent) {
-//        participants.remove(evt.participant)
-//    }
-//
-//    @CommandHandler
-//    fun handle(cmd: PostMessageCommand) {
-//        if (!participants.contains(cmd.participant)) throw IllegalStateException("[post message fail] participant is not in the room..")
-//        AggregateLifecycle.apply(MessagePostedEvent(cmd.roomId, cmd.participant, cmd.message))
-//    }
+    @CommandHandler
+    fun handle(cmd: JoinRoomCommand) {
+        logger.info("!!!!!!!!!!!!!!!!!!!!!! JOIN ROOM COMMAND !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        if (!participants.contains(cmd.participant)) {
+            AggregateLifecycle.apply(ParticipantJoinedRoomEvent(cmd.roomId, cmd.participant))
+        }
+    }
 
+    @EventSourcingHandler
+    fun on(evt: ParticipantJoinedRoomEvent) {
+        participants.add(evt.participant)
+    }
+
+    @CommandHandler
+    fun handle(cmd: LeaveRoomCommand) {
+        if (participants.contains(cmd.participant)) {
+            AggregateLifecycle.apply(ParticipantLeftRoomEvent(cmd.roomId, cmd.participant))
+        }
+    }
+
+    @EventSourcingHandler
+    fun on(evt: ParticipantLeftRoomEvent) {
+        participants.remove(evt.participant)
+    }
+
+    @CommandHandler
+    fun handle(cmd: PostMessageCommand) {
+        if (!participants.contains(cmd.participant)) throw IllegalStateException("[post message fail] participant is not in the room..")
+        AggregateLifecycle.apply(MessagePostedEvent(cmd.roomId, cmd.participant, cmd.message))
+    }
+
+    @EventSourcingHandler
+    fun on(evt: MessagePostedEvent) {
+    }
 }

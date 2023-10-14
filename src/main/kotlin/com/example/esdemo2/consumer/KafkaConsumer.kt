@@ -22,7 +22,7 @@ class KafkaConsumer(
     class InvalidCommandNameException(message: String) : Exception(message)
 
     companion object {
-        const val PACKAGE_NAME = "com.example.esdemo2.coreapi"
+        const val PACKAGE_NAME = "com.example.esdemo2.coreapi.commands"
     }
     val commandClasses = findCommandClasses(PACKAGE_NAME)
 
@@ -32,6 +32,7 @@ class KafkaConsumer(
         // Kafka 메시지를 처리하는 로직을 작성
         println("Received Kafka message: ${kafkaMessage}")
         val command = createCommand(kafkaMessage.commandName, kafkaMessage.body)
+        println("created command : ${command}")
         commandGateway.sendAndWait<Any>(command)
     }
 
@@ -48,7 +49,7 @@ class KafkaConsumer(
 
     private fun findCommandClasses(packageName: String?): Set<String> {
         val reflections = Reflections(packageName, SubTypesScanner(false))
-        val commandInterface = Class.forName("com.example.esdemo2.coreapi.Command")
+        val commandInterface = Class.forName("com.example.esdemo2.coreapi.commands.Command")
         return reflections.getSubTypesOf(commandInterface)
             .map { it.simpleName }
             .toSet()
