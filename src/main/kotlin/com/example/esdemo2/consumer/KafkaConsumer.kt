@@ -3,6 +3,7 @@ package com.example.esdemo2.consumer
 import com.example.esdemo2.consumer.dto.CommandMessage
 import com.fasterxml.jackson.databind.ObjectMapper
 import lombok.RequiredArgsConstructor
+import mu.KotlinLogging
 import org.axonframework.commandhandling.gateway.CommandGateway
 import org.reflections.Reflections
 import org.reflections.scanners.SubTypesScanner
@@ -14,6 +15,10 @@ import org.springframework.stereotype.Component
 class KafkaConsumer(
     private val objectMapper: ObjectMapper,
     private val commandGateway: CommandGateway) {
+    private val logger = KotlinLogging.logger {}
+    init {
+        logger.info { "COMMAND GATEWAY: $commandGateway" }
+    }
     class InvalidCommandNameException(message: String) : Exception(message)
 
     companion object {
