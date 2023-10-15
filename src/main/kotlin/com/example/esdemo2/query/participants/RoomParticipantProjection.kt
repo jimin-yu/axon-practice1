@@ -12,7 +12,7 @@ import javax.transaction.Transactional
 @Component
 class RoomParticipantProjection(
     private val participantRepository: RoomParticipantRepository,
-    private val roomSummaryRepository: RoomSummaryRepository, val participant: String = ""
+    private val roomSummaryRepository: RoomSummaryRepository
 ) {
 
     @EventHandler
