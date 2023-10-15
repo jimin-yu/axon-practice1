@@ -25,8 +25,10 @@ class ChatRoom {
     private val participants: MutableSet<String> = HashSet()
 
 
+    constructor()
+
     @CommandHandler
-    fun handle(cmd: CreateRoomCommand) {
+    constructor(cmd: CreateRoomCommand) {
         logger.info { "handle command"}
         // business logic & validation
         AggregateLifecycle.apply(RoomCreatedEvent(cmd.roomId, cmd.name))
@@ -34,7 +36,6 @@ class ChatRoom {
 
     @EventSourcingHandler
     fun on(evt: RoomCreatedEvent) {
-        System.out.println("room created event!!!!!!!!!!!!!!!!")
         logger.info { "event sourcing handler"}
         roomId = evt.roomId
         name = evt.name
@@ -42,7 +43,6 @@ class ChatRoom {
 
     @CommandHandler
     fun handle(cmd: JoinRoomCommand) {
-        logger.info("!!!!!!!!!!!!!!!!!!!!!! JOIN ROOM COMMAND !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         if (!participants.contains(cmd.participant)) {
             AggregateLifecycle.apply(ParticipantJoinedRoomEvent(cmd.roomId, cmd.participant))
         }

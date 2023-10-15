@@ -1,6 +1,6 @@
 {
   "commandName": "CreateRoomCommand",
   "body": {
-    "name": "채팅방123"
+    "name": "달구나 채팅방"
   }
 }

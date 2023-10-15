@@ -1,7 +1,7 @@
 {
   "commandName": "JoinRoomCommand",
   "body": {
-    "roomId": "9fe8aaa4-a901-4e02-85f8-aeb060da368f",
-    "participant": "Danny Koo"
+    "roomId": "edf64725-1f07-4a59-988f-1c629ca55a39",
+    "participant": "Steve"
   }
 }
