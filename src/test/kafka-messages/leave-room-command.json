@@ -1,7 +1,7 @@
 {
   "commandName": "LeaveRoomCommand",
   "body": {
-    "roomId": "67c91cb3-7bf1-4800-ac6e-11e22ee98276",
-    "participant": "Jay"
+    "roomId": "a46d3bb7-63da-4048-b3c7-9fd206b524d8",
+    "participant": "Danny"
   }
 }

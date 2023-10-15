@@ -5,6 +5,7 @@ axon-quick-start로 제공하고 있는 채팅방 예제 프로젝트를 kotlin,
 (이 예제 프로젝트는 언어 **Java**, 이벤트 스토어 **AxonServer**, ReadDB **h2** 구성)
 
 ![](src/main/resources/static/event-sourcing.png)
+![](src/main/resources/static/project-structure.jpeg)
 
 ### 개발 환경
 - kotlin 1.8.22
@@ -69,7 +70,7 @@ db.domainevents.drop()
 
 - token_entry
     - 공식 문서에서 token을 event-handler 가 view-model을 업데이트 하는 db에 저장할 것을 권장
-      ![](src/main/resources/static/token-entry.png)
+      ![](src/main/resources/static/token-entry2.png)
     - trackedEvents : 이벤트의 eventIdentifier
     - token_type : `org.axonframework.extensions.mongo.eventsourcing.eventstore.MongoTrackingToken`
 - saga_entry

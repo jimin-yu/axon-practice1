@@ -14,9 +14,7 @@ class ChatMessageProjection(private val repository: ChatMessageRepository) {
     // Read db 업데이트
     @EventHandler
     fun on(evt: MessagePostedEvent, @Timestamp timestamp: Instant) {
-        System.out.println("message posted : " + evt.participant + evt.roomId + evt.message)
         val chatMessage = ChatMessage(evt.roomId, evt.participant, evt.message, timestamp.toEpochMilli())
-        System.out.println("chat message :" + chatMessage.participant + chatMessage.roomId + chatMessage.message)
         repository.save(chatMessage)
     }
 

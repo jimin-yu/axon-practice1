@@ -11,7 +11,6 @@ class RoomSummaryProjection(private val repository: RoomSummaryRepository) {
 
     @EventHandler
     fun on(evt: RoomCreatedEvent) {
-        System.out.println("!!!!!!!!!!!!!!!!!!!! EVENT HANDLER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         val summary = RoomSummary(evt.roomId, evt.name)
         repository.save(summary)
     }
