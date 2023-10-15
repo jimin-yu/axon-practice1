@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface RoomParticipantRepository : JpaRepository<RoomParticipant, Long> {
     fun findRoomParticipantsByRoomId(roomId: String): List<RoomParticipant>
-    fun deleteByParticipantAndRoomId(roomId: String, participant: String)
+    fun deleteByParticipantAndRoomId(participant: String, roomId: String)
 }

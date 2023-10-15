@@ -1,11 +1,14 @@
 package com.example.esdemo2.query.participants
 
 import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
 import javax.persistence.Id
 
 @Entity
 class RoomParticipant {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
     var roomId: String = ""
     var participant: String = ""
